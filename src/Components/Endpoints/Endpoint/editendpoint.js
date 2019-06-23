@@ -20,39 +20,32 @@ class EditEndpoint extends React.Component {
     this.state.endpoint_name = this.props.selectedEndpoint.endpoint_name;
     this.state.path = this.props.selectedEndpoint.path
     this.state.method = this.props.selectedEndpoint.method
-
     this.state.data = this.props.selectedEndpoint.data || '{key1 : value1, key2: value2}'
-
     this.state.active = this.props.selectedEndpoint.active
   }
 
 
+  //When user click on reset restore to old values.
   restEndpoint = (e) => {
     e.preventDefault()
     document.getElementById("editform").reset();
     console.log("Clicked on resetEndpoint")
     this.setState({endpoint_name: this.props.selectedEndpoint.endpoint_name })
-
-
-
-    this.state.endpoint_name = this.props.selectedEndpoint.endpoint_name;
-    this.state.path = this.props.selectedEndpoint.path
-    this.state.method = this.props.selectedEndpoint.method
-
-    this.state.data = this.props.selectedEndpoint.data
-
-    this.state.active = this.props.selectedEndpoint.active
-
+    this.setState({path: this.props.selectedEndpoint.path })
+    this.setState({method: this.props.selectedEndpoint.method })
+    this.setState({data: this.props.selectedEndpoint.data })
+    this.setState({active: this.props.selectedEndpoint.active })
+    //this.state.endpoint_name = this.props.selectedEndpoint.endpoint_name;
+    //this.state.path = this.props.selectedEndpoint.path
+    //this.state.method = this.props.selectedEndpoint.method
+    //this.state.data = this.props.selectedEndpoint.data
+    //this.state.active = this.props.selectedEndpoint.active
   }
 
   saveEndpoint = (e) => {
-    
-    e.preventDefault()
-
-    console.log("Clicked on saveEndpoint")
-
-    this.setState({Message: null})
-
+    e.preventDefault();
+    console.log("Clicked on saveEndpoint");
+    this.setState({Message: null});
     let editEndpoint = {
       name: this.state.endpoint_name,
       path: this.state.path,
@@ -119,7 +112,12 @@ class EditEndpoint extends React.Component {
 
   return (
     <form id="editform" autoComplete="off">
-      <h1>Editing endpoint {this.props.id}</h1>
+
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div><h1>Edit Endpoint {this.props.id} </h1></div>
+      </div>
+
+      
         <Form.Group controlId="name">  
           <Form.Label >Endpoint Name</Form.Label>
           <Form.Control type="text" defaultValue={this.props.selectedEndpoint.endpoint_name}

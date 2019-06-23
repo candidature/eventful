@@ -1,4 +1,6 @@
 import React from 'react';
+
+
 import { Form , Button } from 'react-bootstrap';
 import axios from 'axios';
 import FlashMessage from 'react-flash-message'
@@ -17,6 +19,11 @@ class NewEndpoint extends React.Component {
     submitted: false
   }
  
+
+ //This is useful for Edit/Add button
+ // When edit add button clicked displayAddNewEndpoint data is passed via props
+ // and this is set as default data of new object.
+
   constructor(props) {
     super(props)
 
@@ -36,11 +43,11 @@ class NewEndpoint extends React.Component {
     if(method==='POST') {
       this.setState ( {userSelectedMethod: method} );
       this.setState ( {method: method} );
-      this.props.displayAddNewEndpoint.method = 'POST';
+      //this.props.displayAddNewEndpoint.method = 'POST';
     } else {
       this.setState ( {userSelectedMethod: method} );
       this.setState ( {method: method} );
-      this.props.displayAddNewEndpoint.method = 'GET';
+      //this.props.displayAddNewEndpoint.method = 'GET';
     }
   }
 
@@ -132,7 +139,7 @@ class NewEndpoint extends React.Component {
 
       let post_data = ""
     
-      if ( this.props.displayAddNewEndpoint.method === 'POST') {
+      if ( this.state.method === 'POST') {
 
       console.log("Methooood is " + this.state.userSelectedMethod)
       post_data = (
@@ -161,7 +168,15 @@ class NewEndpoint extends React.Component {
           );
 
       } else {
-      return (<div key={this.htmlId} ><FlashMessage duration={5000} persistOnHover={true} position="top"> <p>{this.state.Message}</p> </FlashMessage>
+      return (
+
+
+              <div key={this.htmlId} ><FlashMessage duration={5000} persistOnHover={true} position="top"> <p>{this.state.Message}</p> </FlashMessage>
+
+              <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div><h1>Define New Endpoint</h1></div>
+              </div>
+
                 <Form>
                 {get_data}
                 {post_data}

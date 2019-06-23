@@ -77,7 +77,7 @@ state = {
 			} else {
 				axios.get('http://localhost:5000/endpoint/dev/v1')
          			.then(response=>{
-          			this.setState({endpoints: response.data.endpoints })
+          			this.setState({endpoints: response.data.endpoints });
       			})
 			}
 	}
@@ -116,27 +116,25 @@ state = {
 	} 
 	else {
 	endpoints_jsx = (<div> 
-						<Form.Group inline>
-							<row>
-								<Button style={{margin: '10px' }} inline variant="primary" size="md" active  
+						<Form.Group >
+								<Row>
+								<Button style={{margin: '10px' }}  variant="primary" size="md" active  
 									onClick={this.clickedAddNewEndpoint}>
-										Add New
+										Add New Endpoint
 								</Button>
 
-								<Form.Check inline type='checkbox' label='Active' />
-								<Form.Check inline type='checkbox' label='Owner By Me' />
-								<Form.Check inline type='checkbox' label='POST Method'
+								<Form.Check style={{margin: '10px' }} type='checkbox' label='Active' />
+								<Form.Check  style={{margin: '10px' }} type='checkbox' label='Owner By Me' />
+								<Form.Check style={{margin: '10px' }}  type='checkbox' label='POST Method'
 
 									onClick={ (event) => this.methodCheckbox('POST' , event.target.checked) }
 								/>
-								<Form.Check inline type='checkbox' label='GET Method' 
+								<Form.Check  style={{margin: '10px' }} type='checkbox' label='GET Method'
 									onClick={ (event) => this.methodCheckbox('GET' , event.target.checked) }
 								/>
 
-								<Form.Control inline type="text" placeholder="Search URI" />
-
-					      
-		      				</row>
+								<Form.Control style={{marginLeft: '10px', marginRight: '10px' }} type="text" placeholder="Search URI" />
+								</Row>
 	      				</Form.Group>
       			
 			<Row> {this.state.endpoints.map( (endpoint, index)  => {
