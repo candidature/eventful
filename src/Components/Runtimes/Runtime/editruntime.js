@@ -32,7 +32,7 @@ class EditRuntime extends React.Component {
   }
 
 
-  restEndpoint = (e) => {
+  restRuntime = (e) => {
     e.preventDefault()
     document.getElementById("editform").reset();
     console.log("Clicked on resetRuntime")
@@ -49,11 +49,11 @@ class EditRuntime extends React.Component {
 
   }
 
-  saveEndpoint = (e) => {
+  saveRuntime = (e) => {
     
     e.preventDefault()
 
-    console.log("Clicked on saveEndpoint")
+    console.log("Clicked on saveRuntime")
 
     this.setState({Message: null})
 
@@ -218,9 +218,9 @@ class EditRuntime extends React.Component {
 
 
 
-        <Button variant="primary" onClick={this.saveEndpoint} > Save </Button>
+        <Button variant="primary" onClick={this.saveRuntime} > Save </Button>
 
-        <Button variant="primary" onClick={this.restEndpoint} > Reset </Button>
+        <Button variant="primary" onClick={this.restRuntime} > Reset </Button>
         </form>
     ) }
     }

@@ -8,7 +8,9 @@ import NewEndpoint from './Endpoint/newendpoint'
 import { Row , Button} from 'react-bootstrap';
 import axios from 'axios';
 import { Form } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
+import './endpoints.css';
 class Endpoints extends React.Component {
 
 state = {
@@ -63,12 +65,19 @@ state = {
 	endpointDeletedHandler = (id) => {
 		axios.delete('/endpoint/dev/v1/'+id)
 			 .then(response=>{
-
 			 	this.setState({
         			endpoints: this.state.endpoints.filter(el => el.id !== id)
     			})
-		 })
+		 	})
+			 .catch( (error) => {
+    				console.log(error.response.data.message + JSON.stringify(error.response.data.endpoints))
+    				toast.error("Can not delete this endpoint id : " + id + " First unlink below associations");
+    				toast.info(JSON.stringify(error.response.data.endpoints));
+					//his.setState({ Message: error.response.data.message + error.response.data.endpoints })
+			})
 	}
+
+
 
 	methodCheckbox = (method, checked) => {
 			console.log("clicked "+ method)
@@ -156,6 +165,7 @@ state = {
 		}
 
     	return (<div>
+    				
     				<section>
     						{endpoints_jsx}
 					</section>

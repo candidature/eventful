@@ -8,6 +8,7 @@ import NewRuntime from './Runtime/newruntime'
 import { Row , Button} from 'react-bootstrap';
 import axios from 'axios';
 import { Form } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 class Runtimes extends React.Component {
 
@@ -68,7 +69,13 @@ state = {
 			 	this.setState({
         			runtimes: this.state.runtimes.filter(el => el.id !== id)
     			})
-		 })
+		 	  })
+			 .catch( (error) => {
+    				console.log(error.response.data.message + JSON.stringify(error.response.data.runtimes))
+    				toast.error("Can not delete this runtime id : " + id + " First unlink below associations");
+    				toast.info(JSON.stringify(error.response.data.runtimes));
+					//his.setState({ Message: error.response.data.message + error.response.data.endpoints })
+			 })
 	}
 
 	methodCheckbox = (method, checked) => {

@@ -8,6 +8,7 @@ import NewCode from './Code/newcode';
 import { Row , Button} from 'react-bootstrap';
 import axios from 'axios';
 import { Form } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 class Codes extends React.Component {
 
@@ -70,7 +71,13 @@ state = {
 			 	this.setState({
         			codes: this.state.codes.filter(el => el.id !== id)
     			})
-		 })
+		 	  })
+			 .catch( (error) => {
+    				console.log(error.response.data.message + JSON.stringify(error.response.data.codes))
+    				toast.error("Can not delete this code id : " + id + " First unlink below associations");
+    				toast.info(JSON.stringify(error.response.data.codes));
+					//his.setState({ Message: error.response.data.message + error.response.data.endpoints })
+			})
 	}
 
 	methodCheckbox = (method, checked) => {

@@ -11,7 +11,7 @@ class NewEndpoint extends React.Component {
   state = {
     name: '',
     path : '',
-    method: '',
+    method: 'GET',
     data : '{key1 : value1, key2: value2}',
     active: true,
     userSelectedMethod: 'GET',
@@ -41,21 +41,27 @@ class NewEndpoint extends React.Component {
   handleMethodChange = (e) => {
     let method = e.target.value.trim()
     if(method==='POST') {
-      this.setState ( {userSelectedMethod: method} );
-      this.setState ( {method: method} );
+      this.setState ( {userSelectedMethod: 'POST'} );
+      this.setState ( {method: 'POST'} );
       //this.props.displayAddNewEndpoint.method = 'POST';
     } else {
-      this.setState ( {userSelectedMethod: method} );
-      this.setState ( {method: method} );
+      this.setState ( {userSelectedMethod: 'GET'} );
+      this.setState ( {method: 'GET'} );
       //this.props.displayAddNewEndpoint.method = 'GET';
     }
   }
 
+  componentDidMount() {
+    console.log("Value at mount")
+    console.log(this.props.displayAddNewEndpoint.method)
+  }
+
   createNewEndpoint = (e) => {
     
-    e.preventDefault()
+    //e.preventDefault()
 
     console.log("Clicked on createNewEndpoint")
+    console.log(e.target.value)
 
     this.setState({Message: null})
 
@@ -70,7 +76,7 @@ class NewEndpoint extends React.Component {
       newEndpoint['data'] = this.state.data
     }
 
-    //console.log("On submit " + JSON.stringify(newEndpoint))
+    console.log("On submit " + JSON.stringify(newEndpoint))
 
     axios.post('/endpoint/dev/v1/0', newEndpoint,
                     { headers: { 'Content-Type': 'application/json' } } )
@@ -118,7 +124,7 @@ class NewEndpoint extends React.Component {
           <Form.Label>Method to call</Form.Label>
             <Form.Control as="select" onChange={this.handleMethodChange} value={this.state.method}>
 
-              <option>GET</option>
+              <option >GET</option>
               <option>POST</option>
 
             </Form.Control>
